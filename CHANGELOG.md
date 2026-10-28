@@ -8,6 +8,10 @@ each one's section: what `[Unreleased]` had, and the title of each change merged
 
 ## [Unreleased]
 
+### Added
+
+- Git-index registries can be resolved and fetched, including offline use of Cargo's index and archive caches; failed index updates are reported instead of using an old tree (#316).
+
 ## [0.20261028.1] - 2026-10-28
 
 ### Fixed

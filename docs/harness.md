@@ -15,6 +15,8 @@ report the dev targets' errors. Each target flag must pick what cargo's does: `-
 example or bench, `--test NAME` the one test, `--lib` no unit tests, and a member only
 depended on its library alone.
 
+`gitindex.py`: A local git-index registry fetches two packages with Cargo-equal paths, source trees, archives and index cache bytes; each tool then reads the other's cache offline (#316).
+
 ## Running them
 
 You need Python 3, the pinned nightly (`harness/toolchain`, `nightly-2026-10-25`) with
