@@ -15,6 +15,8 @@ report the dev targets' errors. Each target flag must pick what cargo's does: `-
 example or bench, `--test NAME` the one test, `--lib` no unit tests, and a member only
 depended on its library alone.
 
+`nativespans.py`: A native proc macro asks for a span's source text, line, column, byte range and file; edits and a daemon restart must agree with Cargo, under native and wasm expansion (#823).
+
 `deriveerrors.py`: Unused invalid built-in derives fail check and build as Cargo's do; a valid edit and a daemon restart preserve the verdict (#751).
 
 ## Running them
