@@ -713,6 +713,85 @@
    {
     "dependencies": [
      "anyhow",
+     "ar_archive_writer",
+     "aws-config",
+     "aws-sdk-s3",
+     "aws-smithy-http-client",
+     "base64",
+     "blaze-build-script",
+     "blaze-cache",
+     "blaze-fmt",
+     "blaze-in-place",
+     "blaze-lints",
+     "blaze-live",
+     "blaze-macro-wasm",
+     "blaze-manifest",
+     "blaze-metadata",
+     "blaze-new",
+     "blaze-registry",
+     "blaze-resolve",
+     "blaze-store",
+     "blaze-tree",
+     "blaze-units",
+     "blaze-wasi",
+     "cargo-platform",
+     "cargo-util-schemas",
+     "cargo_metadata",
+     "cfg",
+     "dunce",
+     "ed25519-dalek",
+     "find-msvc-tools",
+     "futures-util",
+     "getrandom 0.3.4",
+     "hir-ty-codegen",
+     "http-body-util",
+     "hyper",
+     "hyper-rustls",
+     "hyper-util",
+     "ide-db",
+     "intern",
+     "libc",
+     "lzma-rust2",
+     "memmap2",
+     "object 0.37.3",
+     "paths",
+     "project-model",
+     "rustc-hash 2.1.2",
+     "rustls",
+     "salsa",
+     "same-file",
+     "semver",
+     "serde",
+     "serde_derive",
+     "serde_json",
+     "sha2 0.10.9",
+     "shlex",
+     "syntax",
+     "tar",
+     "tempfile",
+     "thorin-dwp",
+     "tikv-jemalloc-ctl",
+     "tikv-jemalloc-sys",
+     "tokio",
+     "toml",
+     "toml_edit",
+     "toolchain",
+     "tracing",
+     "triomphe",
+     "typed-arena",
+     "uds_windows",
+     "url",
+     "vfs",
+     "windows-sys 0.61.2",
+     "zip",
+     "zstd"
+    ],
+    "name": "blaze-cargo",
+    "version": "0.20261028.1"
+   },
+   {
+    "dependencies": [
+     "anyhow",
      "base-db",
      "either",
      "hir",
@@ -736,70 +815,44 @@
    {
     "dependencies": [
      "anyhow",
-     "ar_archive_writer",
-     "aws-config",
-     "aws-sdk-s3",
-     "aws-smithy-http-client",
-     "base64",
-     "blaze-build-script",
-     "blaze-cache",
+     "blaze-cargo",
      "blaze-doc",
      "blaze-expand",
-     "blaze-fmt",
      "blaze-lints",
      "blaze-live",
      "blaze-macro-wasm",
-     "blaze-manifest",
-     "blaze-metadata",
-     "blaze-new",
-     "blaze-registry",
-     "blaze-resolve",
+     "blaze-splice",
      "blaze-store",
-     "blaze-tree",
-     "blaze-units",
      "blaze-wasi",
-     "cargo-platform",
-     "cargo-util-schemas",
      "cargo_metadata",
      "cfg",
      "dunce",
-     "ed25519-dalek",
      "find-msvc-tools",
-     "futures-util",
-     "getrandom 0.3.4",
+     "flate2",
      "gimli 0.33.0",
      "hir",
      "hir-def",
      "hir-ty",
      "hir-ty-borrowck",
      "hir-ty-codegen",
-     "http-body-util",
-     "hyper",
-     "hyper-rustls",
-     "hyper-util",
      "ide-db",
      "ide-diagnostics",
      "intern",
      "libc",
      "load-cargo",
-     "lzma-rust2",
      "memchr",
      "memmap2",
      "mimalloc",
      "object 0.37.3",
      "paths",
-     "pdb",
      "proc-macro-api",
      "project-model",
      "pulldown-cmark",
      "rustc-demangle",
      "rustc-hash 2.1.2",
-     "rustls",
      "salsa",
      "same-file",
-     "semver",
      "serde",
-     "serde_derive",
      "serde_json",
      "sha2 0.10.9",
      "shlex",
@@ -807,24 +860,18 @@
      "tar",
      "tempfile",
      "test-fixture",
-     "thorin-dwp",
-     "tikv-jemalloc-ctl",
-     "tikv-jemalloc-sys",
      "tikv-jemallocator",
      "tokio",
      "toml",
      "toml_edit",
      "toolchain",
-     "tracing",
      "triomphe",
-     "typed-arena",
      "uds_windows",
      "url",
      "vfs",
      "wasm-encoder 0.244.0",
      "wasmparser 0.236.1",
      "windows-sys 0.61.2",
-     "zip",
      "zstd"
     ],
     "name": "blaze-engine",
@@ -874,6 +921,13 @@
    },
    {
     "name": "blaze-fuzz",
+    "version": "0.20261028.1"
+   },
+   {
+    "dependencies": [
+     "libc"
+    ],
+    "name": "blaze-in-place",
     "version": "0.20261028.1"
    },
    {
@@ -1037,6 +1091,23 @@
      "url"
     ],
     "name": "blaze-source",
+    "version": "0.20261028.1"
+   },
+   {
+    "dependencies": [
+     "anyhow",
+     "blaze-in-place",
+     "blaze-live",
+     "libc",
+     "memmap2",
+     "object 0.37.3",
+     "pdb",
+     "rustc-hash 2.1.2",
+     "sha2 0.10.9",
+     "wasm-encoder 0.244.0",
+     "wasmparser 0.236.1"
+    ],
+    "name": "blaze-splice",
     "version": "0.20261028.1"
    },
    {
@@ -7887,6 +7958,23 @@
    },
    "version": "0.1.0"
   },
+  "blaze-cargo@0.20261028.1": {
+   "authors": "blaze contributors",
+   "description": "blaze's cargo: the commands, the daemon and its client, plans, the sandbox and the remote store",
+   "homepage": "https://ix.dev/blaze",
+   "license": "MIT OR Apache-2.0",
+   "license_file": "",
+   "links": null,
+   "name": "blaze-cargo",
+   "readme": "",
+   "repository": "https://github.com/indexable-inc/blaze",
+   "rust_version": "1.101",
+   "source": {
+    "dir": "crates/blaze-cargo",
+    "kind": "path"
+   },
+   "version": "0.20261028.1"
+  },
   "blaze-doc@0.20261028.1": {
    "authors": "blaze contributors",
    "description": "HTML documentation of a workspace and its dependencies, written by blaze from rust-analyzer's HIR, with no rustdoc",
@@ -7968,6 +8056,23 @@
    "rust_version": "1.101",
    "source": {
     "dir": "crates/blaze-fuzz",
+    "kind": "path"
+   },
+   "version": "0.20261028.1"
+  },
+  "blaze-in-place@0.20261028.1": {
+   "authors": "blaze contributors",
+   "description": "Waiting for and copying an executable blaze splices edits into in place",
+   "homepage": "https://ix.dev/blaze",
+   "license": "MIT OR Apache-2.0",
+   "license_file": "",
+   "links": null,
+   "name": "blaze-in-place",
+   "readme": "",
+   "repository": "https://github.com/indexable-inc/blaze",
+   "rust_version": "1.101",
+   "source": {
+    "dir": "crates/blaze-in-place",
     "kind": "path"
    },
    "version": "0.20261028.1"
@@ -8138,6 +8243,23 @@
    "rust_version": "1.101",
    "source": {
     "dir": "crates/blaze-source",
+    "kind": "path"
+   },
+   "version": "0.20261028.1"
+  },
+  "blaze-splice@0.20261028.1": {
+   "authors": "blaze contributors",
+   "description": "blaze's splice: an edit's functions written into the executable of the last link, ELF, Mach-O, PE and wasm",
+   "homepage": "https://ix.dev/blaze",
+   "license": "MIT OR Apache-2.0",
+   "license_file": "",
+   "links": null,
+   "name": "blaze-splice",
+   "readme": "",
+   "repository": "https://github.com/indexable-inc/blaze",
+   "rust_version": "1.101",
+   "source": {
+    "dir": "crates/blaze-splice",
     "kind": "path"
    },
    "version": "0.20261028.1"
@@ -18870,6 +18992,356 @@
      "src": "src/lib.rs",
      "target": "blaze"
     },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build build host": {
+     "crate_type": "bin",
+     "deps": [],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "0",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build": {
+     "crate_type": "bin",
+     "deps": [
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build build host"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "run-custom-build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 lib blaze_cargo build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "ar_archive_writer",
+       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
+      },
+      {
+       "name": "aws_config",
+       "unit": "aws-config@1.12.0 lib aws_config build"
+      },
+      {
+       "name": "aws_sdk_s3",
+       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
+      },
+      {
+       "name": "aws_smithy_http_client",
+       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
+      },
+      {
+       "name": "base64",
+       "unit": "base64@0.23.1 lib base64 build"
+      },
+      {
+       "name": "blaze_build_script",
+       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
+      },
+      {
+       "name": "fn_cache",
+       "unit": "blaze-cache@0.1.0 lib blaze build"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build"
+      },
+      {
+       "name": "blaze_fmt",
+       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_lints",
+       "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "blaze_macro_wasm",
+       "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
+      },
+      {
+       "name": "blaze_manifest",
+       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
+      },
+      {
+       "name": "blaze_metadata",
+       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
+      },
+      {
+       "name": "blaze_new",
+       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
+      },
+      {
+       "name": "blaze_registry",
+       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
+      },
+      {
+       "name": "blaze_resolve",
+       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+      },
+      {
+       "name": "blaze_store",
+       "unit": "blaze-store@0.20261028.1 lib blaze_store build"
+      },
+      {
+       "name": "blaze_tree",
+       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
+      },
+      {
+       "name": "blaze_units",
+       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
+      },
+      {
+       "name": "blaze_wasi",
+       "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
+      },
+      {
+       "name": "cargo_platform",
+       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
+      },
+      {
+       "name": "cargo_util_schemas",
+       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
+      },
+      {
+       "name": "cargo_metadata",
+       "unit": "cargo_metadata@0.23.1 lib cargo_metadata build"
+      },
+      {
+       "name": "cfg",
+       "unit": "cfg@0.0.0 lib cfg build"
+      },
+      {
+       "name": "dunce",
+       "unit": "dunce@1.0.5 lib dunce build"
+      },
+      {
+       "name": "ed25519_dalek",
+       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
+      },
+      {
+       "name": "futures_util",
+       "unit": "futures-util@0.3.32 lib futures_util build"
+      },
+      {
+       "name": "getrandom",
+       "unit": "getrandom@0.3.4 lib getrandom build"
+      },
+      {
+       "name": "hir_ty_codegen",
+       "unit": "hir-ty-codegen@0.20261028.1 lib hir_ty_codegen build"
+      },
+      {
+       "name": "http_body_util",
+       "unit": "http-body-util@0.1.5 lib http_body_util build"
+      },
+      {
+       "name": "hyper_rustls",
+       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
+      },
+      {
+       "name": "hyper_util",
+       "unit": "hyper-util@0.1.21 lib hyper_util build"
+      },
+      {
+       "name": "hyper",
+       "unit": "hyper@1.12.0 lib hyper build"
+      },
+      {
+       "name": "ide_db",
+       "unit": "ide-db@0.0.0 lib ide_db build"
+      },
+      {
+       "name": "intern",
+       "unit": "intern@0.0.0 lib intern build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "lzma_rust2",
+       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "paths",
+       "unit": "paths@0.0.0 lib paths build"
+      },
+      {
+       "name": "project_model",
+       "unit": "project-model@0.0.0 lib project_model build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "rustls",
+       "unit": "rustls@0.23.46 lib rustls build"
+      },
+      {
+       "name": "salsa",
+       "unit": "salsa@0.28.5 lib salsa build"
+      },
+      {
+       "name": "same_file",
+       "unit": "same-file@1.0.6 lib same_file build"
+      },
+      {
+       "name": "semver",
+       "unit": "semver@1.0.28 lib semver build"
+      },
+      {
+       "name": "serde",
+       "unit": "serde@1.0.228 lib serde build"
+      },
+      {
+       "name": "serde_derive",
+       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
+      },
+      {
+       "name": "serde_json",
+       "unit": "serde_json@1.0.150 lib serde_json build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "shlex",
+       "unit": "shlex@2.0.1 lib shlex build"
+      },
+      {
+       "name": "syntax",
+       "unit": "syntax@0.0.0 lib syntax build"
+      },
+      {
+       "name": "tar",
+       "unit": "tar@0.4.46 lib tar build"
+      },
+      {
+       "name": "thorin",
+       "unit": "thorin-dwp@0.10.0 lib thorin build"
+      },
+      {
+       "name": "tikv_jemalloc_ctl",
+       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
+      },
+      {
+       "name": "tikv_jemalloc_sys",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
+      },
+      {
+       "name": "tokio",
+       "unit": "tokio@1.53.3 lib tokio build"
+      },
+      {
+       "name": "toml",
+       "unit": "toml@1.1.2+spec-1.1.0 lib toml build"
+      },
+      {
+       "name": "toml_edit",
+       "unit": "toml_edit@0.25.12+spec-1.1.0 lib toml_edit build"
+      },
+      {
+       "name": "toolchain",
+       "unit": "toolchain@0.0.0 lib toolchain build"
+      },
+      {
+       "name": "tracing",
+       "unit": "tracing@0.1.44 lib tracing build"
+      },
+      {
+       "name": "triomphe",
+       "unit": "triomphe@0.1.15 lib triomphe build"
+      },
+      {
+       "name": "typed_arena",
+       "unit": "typed-arena@2.0.2 lib typed_arena build"
+      },
+      {
+       "name": "url",
+       "unit": "url@2.5.8 lib url build"
+      },
+      {
+       "name": "vfs",
+       "unit": "vfs@0.0.0 lib vfs build"
+      },
+      {
+       "name": "zip",
+       "unit": "zip@9.1.2 lib zip build"
+      },
+      {
+       "name": "zstd",
+       "unit": "zstd@0.13.3 lib zstd build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_cargo"
+    },
     "blaze-doc@0.20261028.1 lib blaze_doc build": {
      "crate_type": "lib",
      "deps": [
@@ -18963,32 +19435,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -19007,10 +19455,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -19023,48 +19467,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -19079,16 +19491,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -19115,22 +19519,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -19151,10 +19539,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -19169,10 +19553,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -19195,10 +19575,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -19207,16 +19583,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -19239,18 +19607,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -19271,16 +19627,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -19297,10 +19645,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -19332,32 +19676,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -19376,10 +19696,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -19392,48 +19708,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -19448,16 +19732,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -19484,22 +19760,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -19520,10 +19780,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -19538,10 +19794,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -19564,10 +19816,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -19576,16 +19824,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -19608,18 +19848,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -19640,16 +19868,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -19666,10 +19886,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -19701,32 +19917,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -19745,10 +19937,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -19761,48 +19949,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -19817,16 +19973,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -19853,22 +20001,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -19889,10 +20021,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -19907,10 +20035,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -19933,10 +20057,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -19945,16 +20065,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -19977,18 +20089,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -20009,16 +20109,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -20035,10 +20127,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -20088,10 +20176,6 @@
       {
        "name": "build_script_build",
        "unit": "blaze-engine@0.20261028.1 custom-build build-script-build build host"
-      },
-      {
-       "name": "build_script_build",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
       }
      ],
      "edition": "2024",
@@ -20119,32 +20203,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -20159,10 +20219,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -20175,48 +20231,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -20231,16 +20255,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -20267,22 +20283,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -20303,10 +20303,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -20321,10 +20317,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -20347,10 +20339,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -20359,16 +20347,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -20391,18 +20371,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -20423,16 +20391,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -20449,10 +20409,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -20637,6 +20593,31 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_fmt"
+    },
+    "blaze-in-place@0.20261028.1 lib blaze_in_place build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-in-place@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_in_place"
     },
     "blaze-lints@0.20261028.1 lib blaze_lints build": {
      "crate_type": "lib",
@@ -21217,6 +21198,71 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_source"
+    },
+    "blaze-splice@0.20261028.1 lib blaze_splice build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "pdb",
+       "unit": "pdb@0.8.0 lib pdb build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "wasm_encoder",
+       "unit": "wasm-encoder@0.244.0 lib wasm_encoder build"
+      },
+      {
+       "name": "wasmparser",
+       "unit": "wasmparser@0.236.1 lib wasmparser build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-splice@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_splice"
     },
     "blaze-store@0.20261028.1 lib blaze_store build": {
      "crate_type": "lib",
@@ -39919,6 +39965,356 @@
      "src": "src/lib.rs",
      "target": "blaze"
     },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build build host": {
+     "crate_type": "bin",
+     "deps": [],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "0",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build": {
+     "crate_type": "bin",
+     "deps": [
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build build host"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "run-custom-build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 lib blaze_cargo build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "ar_archive_writer",
+       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
+      },
+      {
+       "name": "aws_config",
+       "unit": "aws-config@1.12.0 lib aws_config build"
+      },
+      {
+       "name": "aws_sdk_s3",
+       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
+      },
+      {
+       "name": "aws_smithy_http_client",
+       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
+      },
+      {
+       "name": "base64",
+       "unit": "base64@0.23.1 lib base64 build"
+      },
+      {
+       "name": "blaze_build_script",
+       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
+      },
+      {
+       "name": "fn_cache",
+       "unit": "blaze-cache@0.1.0 lib blaze build"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build"
+      },
+      {
+       "name": "blaze_fmt",
+       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_lints",
+       "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "blaze_macro_wasm",
+       "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
+      },
+      {
+       "name": "blaze_manifest",
+       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
+      },
+      {
+       "name": "blaze_metadata",
+       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
+      },
+      {
+       "name": "blaze_new",
+       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
+      },
+      {
+       "name": "blaze_registry",
+       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
+      },
+      {
+       "name": "blaze_resolve",
+       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+      },
+      {
+       "name": "blaze_store",
+       "unit": "blaze-store@0.20261028.1 lib blaze_store build"
+      },
+      {
+       "name": "blaze_tree",
+       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
+      },
+      {
+       "name": "blaze_units",
+       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
+      },
+      {
+       "name": "blaze_wasi",
+       "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
+      },
+      {
+       "name": "cargo_platform",
+       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
+      },
+      {
+       "name": "cargo_util_schemas",
+       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
+      },
+      {
+       "name": "cargo_metadata",
+       "unit": "cargo_metadata@0.23.1 lib cargo_metadata build"
+      },
+      {
+       "name": "cfg",
+       "unit": "cfg@0.0.0 lib cfg build"
+      },
+      {
+       "name": "dunce",
+       "unit": "dunce@1.0.5 lib dunce build"
+      },
+      {
+       "name": "ed25519_dalek",
+       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
+      },
+      {
+       "name": "futures_util",
+       "unit": "futures-util@0.3.32 lib futures_util build"
+      },
+      {
+       "name": "getrandom",
+       "unit": "getrandom@0.3.4 lib getrandom build"
+      },
+      {
+       "name": "hir_ty_codegen",
+       "unit": "hir-ty-codegen@0.20261028.1 lib hir_ty_codegen build"
+      },
+      {
+       "name": "http_body_util",
+       "unit": "http-body-util@0.1.5 lib http_body_util build"
+      },
+      {
+       "name": "hyper_rustls",
+       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
+      },
+      {
+       "name": "hyper_util",
+       "unit": "hyper-util@0.1.21 lib hyper_util build"
+      },
+      {
+       "name": "hyper",
+       "unit": "hyper@1.12.0 lib hyper build"
+      },
+      {
+       "name": "ide_db",
+       "unit": "ide-db@0.0.0 lib ide_db build"
+      },
+      {
+       "name": "intern",
+       "unit": "intern@0.0.0 lib intern build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "lzma_rust2",
+       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "paths",
+       "unit": "paths@0.0.0 lib paths build"
+      },
+      {
+       "name": "project_model",
+       "unit": "project-model@0.0.0 lib project_model build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "rustls",
+       "unit": "rustls@0.23.46 lib rustls build"
+      },
+      {
+       "name": "salsa",
+       "unit": "salsa@0.28.5 lib salsa build"
+      },
+      {
+       "name": "same_file",
+       "unit": "same-file@1.0.6 lib same_file build"
+      },
+      {
+       "name": "semver",
+       "unit": "semver@1.0.28 lib semver build"
+      },
+      {
+       "name": "serde",
+       "unit": "serde@1.0.228 lib serde build"
+      },
+      {
+       "name": "serde_derive",
+       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
+      },
+      {
+       "name": "serde_json",
+       "unit": "serde_json@1.0.150 lib serde_json build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "shlex",
+       "unit": "shlex@2.0.1 lib shlex build"
+      },
+      {
+       "name": "syntax",
+       "unit": "syntax@0.0.0 lib syntax build"
+      },
+      {
+       "name": "tar",
+       "unit": "tar@0.4.46 lib tar build"
+      },
+      {
+       "name": "thorin",
+       "unit": "thorin-dwp@0.10.0 lib thorin build"
+      },
+      {
+       "name": "tikv_jemalloc_ctl",
+       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
+      },
+      {
+       "name": "tikv_jemalloc_sys",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
+      },
+      {
+       "name": "tokio",
+       "unit": "tokio@1.53.3 lib tokio build"
+      },
+      {
+       "name": "toml",
+       "unit": "toml@1.1.2+spec-1.1.0 lib toml build"
+      },
+      {
+       "name": "toml_edit",
+       "unit": "toml_edit@0.25.12+spec-1.1.0 lib toml_edit build"
+      },
+      {
+       "name": "toolchain",
+       "unit": "toolchain@0.0.0 lib toolchain build"
+      },
+      {
+       "name": "tracing",
+       "unit": "tracing@0.1.44 lib tracing build"
+      },
+      {
+       "name": "triomphe",
+       "unit": "triomphe@0.1.15 lib triomphe build"
+      },
+      {
+       "name": "typed_arena",
+       "unit": "typed-arena@2.0.2 lib typed_arena build"
+      },
+      {
+       "name": "url",
+       "unit": "url@2.5.8 lib url build"
+      },
+      {
+       "name": "vfs",
+       "unit": "vfs@0.0.0 lib vfs build"
+      },
+      {
+       "name": "zip",
+       "unit": "zip@9.1.2 lib zip build"
+      },
+      {
+       "name": "zstd",
+       "unit": "zstd@0.13.3 lib zstd build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_cargo"
+    },
     "blaze-doc@0.20261028.1 lib blaze_doc build": {
      "crate_type": "lib",
      "deps": [
@@ -40012,32 +40408,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -40056,10 +40428,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -40072,48 +40440,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -40128,16 +40464,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -40164,22 +40492,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -40200,10 +40512,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -40218,10 +40526,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -40244,10 +40548,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -40256,16 +40556,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -40288,18 +40580,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -40320,16 +40600,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -40346,10 +40618,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -40381,32 +40649,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -40425,10 +40669,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -40441,48 +40681,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -40497,16 +40705,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -40533,22 +40733,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -40569,10 +40753,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -40587,10 +40767,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -40613,10 +40789,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -40625,16 +40797,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -40657,18 +40821,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -40689,16 +40841,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -40715,10 +40859,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -40750,32 +40890,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -40794,10 +40910,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -40810,48 +40922,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -40866,16 +40946,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -40902,22 +40974,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -40938,10 +40994,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -40956,10 +41008,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -40982,10 +41030,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -40994,16 +41038,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -41026,18 +41062,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -41058,16 +41082,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -41084,10 +41100,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -41137,10 +41149,6 @@
       {
        "name": "build_script_build",
        "unit": "blaze-engine@0.20261028.1 custom-build build-script-build build host"
-      },
-      {
-       "name": "build_script_build",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
       }
      ],
      "edition": "2024",
@@ -41168,32 +41176,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -41208,10 +41192,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -41224,48 +41204,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -41280,16 +41228,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -41316,22 +41256,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -41352,10 +41276,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -41370,10 +41290,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -41396,10 +41312,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -41408,16 +41320,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -41440,18 +41344,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -41472,16 +41364,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -41498,10 +41382,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -41686,6 +41566,31 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_fmt"
+    },
+    "blaze-in-place@0.20261028.1 lib blaze_in_place build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-in-place@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_in_place"
     },
     "blaze-lints@0.20261028.1 lib blaze_lints build": {
      "crate_type": "lib",
@@ -42266,6 +42171,71 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_source"
+    },
+    "blaze-splice@0.20261028.1 lib blaze_splice build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "pdb",
+       "unit": "pdb@0.8.0 lib pdb build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "wasm_encoder",
+       "unit": "wasm-encoder@0.244.0 lib wasm_encoder build"
+      },
+      {
+       "name": "wasmparser",
+       "unit": "wasmparser@0.236.1 lib wasmparser build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-splice@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_splice"
     },
     "blaze-store@0.20261028.1 lib blaze_store build": {
      "crate_type": "lib",
@@ -60841,6 +60811,356 @@
      "src": "src/lib.rs",
      "target": "blaze"
     },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build build host": {
+     "crate_type": "bin",
+     "deps": [],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "0",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build": {
+     "crate_type": "bin",
+     "deps": [
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build build host"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "run-custom-build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 lib blaze_cargo build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "ar_archive_writer",
+       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
+      },
+      {
+       "name": "aws_config",
+       "unit": "aws-config@1.12.0 lib aws_config build"
+      },
+      {
+       "name": "aws_sdk_s3",
+       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
+      },
+      {
+       "name": "aws_smithy_http_client",
+       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
+      },
+      {
+       "name": "base64",
+       "unit": "base64@0.23.1 lib base64 build"
+      },
+      {
+       "name": "blaze_build_script",
+       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
+      },
+      {
+       "name": "fn_cache",
+       "unit": "blaze-cache@0.1.0 lib blaze build"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build"
+      },
+      {
+       "name": "blaze_fmt",
+       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_lints",
+       "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "blaze_macro_wasm",
+       "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
+      },
+      {
+       "name": "blaze_manifest",
+       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
+      },
+      {
+       "name": "blaze_metadata",
+       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
+      },
+      {
+       "name": "blaze_new",
+       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
+      },
+      {
+       "name": "blaze_registry",
+       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
+      },
+      {
+       "name": "blaze_resolve",
+       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+      },
+      {
+       "name": "blaze_store",
+       "unit": "blaze-store@0.20261028.1 lib blaze_store build"
+      },
+      {
+       "name": "blaze_tree",
+       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
+      },
+      {
+       "name": "blaze_units",
+       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
+      },
+      {
+       "name": "blaze_wasi",
+       "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
+      },
+      {
+       "name": "cargo_platform",
+       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
+      },
+      {
+       "name": "cargo_util_schemas",
+       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
+      },
+      {
+       "name": "cargo_metadata",
+       "unit": "cargo_metadata@0.23.1 lib cargo_metadata build"
+      },
+      {
+       "name": "cfg",
+       "unit": "cfg@0.0.0 lib cfg build"
+      },
+      {
+       "name": "dunce",
+       "unit": "dunce@1.0.5 lib dunce build"
+      },
+      {
+       "name": "ed25519_dalek",
+       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
+      },
+      {
+       "name": "futures_util",
+       "unit": "futures-util@0.3.32 lib futures_util build"
+      },
+      {
+       "name": "getrandom",
+       "unit": "getrandom@0.3.4 lib getrandom build"
+      },
+      {
+       "name": "hir_ty_codegen",
+       "unit": "hir-ty-codegen@0.20261028.1 lib hir_ty_codegen build"
+      },
+      {
+       "name": "http_body_util",
+       "unit": "http-body-util@0.1.5 lib http_body_util build"
+      },
+      {
+       "name": "hyper_rustls",
+       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
+      },
+      {
+       "name": "hyper_util",
+       "unit": "hyper-util@0.1.21 lib hyper_util build"
+      },
+      {
+       "name": "hyper",
+       "unit": "hyper@1.12.0 lib hyper build"
+      },
+      {
+       "name": "ide_db",
+       "unit": "ide-db@0.0.0 lib ide_db build"
+      },
+      {
+       "name": "intern",
+       "unit": "intern@0.0.0 lib intern build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "lzma_rust2",
+       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "paths",
+       "unit": "paths@0.0.0 lib paths build"
+      },
+      {
+       "name": "project_model",
+       "unit": "project-model@0.0.0 lib project_model build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "rustls",
+       "unit": "rustls@0.23.46 lib rustls build"
+      },
+      {
+       "name": "salsa",
+       "unit": "salsa@0.28.5 lib salsa build"
+      },
+      {
+       "name": "same_file",
+       "unit": "same-file@1.0.6 lib same_file build"
+      },
+      {
+       "name": "semver",
+       "unit": "semver@1.0.28 lib semver build"
+      },
+      {
+       "name": "serde",
+       "unit": "serde@1.0.228 lib serde build"
+      },
+      {
+       "name": "serde_derive",
+       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
+      },
+      {
+       "name": "serde_json",
+       "unit": "serde_json@1.0.150 lib serde_json build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "shlex",
+       "unit": "shlex@2.0.1 lib shlex build"
+      },
+      {
+       "name": "syntax",
+       "unit": "syntax@0.0.0 lib syntax build"
+      },
+      {
+       "name": "tar",
+       "unit": "tar@0.4.46 lib tar build"
+      },
+      {
+       "name": "thorin",
+       "unit": "thorin-dwp@0.10.0 lib thorin build"
+      },
+      {
+       "name": "tikv_jemalloc_ctl",
+       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
+      },
+      {
+       "name": "tikv_jemalloc_sys",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
+      },
+      {
+       "name": "tokio",
+       "unit": "tokio@1.53.3 lib tokio build"
+      },
+      {
+       "name": "toml",
+       "unit": "toml@1.1.2+spec-1.1.0 lib toml build"
+      },
+      {
+       "name": "toml_edit",
+       "unit": "toml_edit@0.25.12+spec-1.1.0 lib toml_edit build"
+      },
+      {
+       "name": "toolchain",
+       "unit": "toolchain@0.0.0 lib toolchain build"
+      },
+      {
+       "name": "tracing",
+       "unit": "tracing@0.1.44 lib tracing build"
+      },
+      {
+       "name": "triomphe",
+       "unit": "triomphe@0.1.15 lib triomphe build"
+      },
+      {
+       "name": "typed_arena",
+       "unit": "typed-arena@2.0.2 lib typed_arena build"
+      },
+      {
+       "name": "url",
+       "unit": "url@2.5.8 lib url build"
+      },
+      {
+       "name": "vfs",
+       "unit": "vfs@0.0.0 lib vfs build"
+      },
+      {
+       "name": "zip",
+       "unit": "zip@9.1.2 lib zip build"
+      },
+      {
+       "name": "zstd",
+       "unit": "zstd@0.13.3 lib zstd build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_cargo"
+    },
     "blaze-doc@0.20261028.1 lib blaze_doc build": {
      "crate_type": "lib",
      "deps": [
@@ -60934,32 +61254,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -60978,10 +61274,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -60994,48 +61286,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -61050,16 +61310,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -61086,22 +61338,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -61122,10 +61358,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -61140,10 +61372,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -61166,10 +61394,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -61178,16 +61402,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -61210,18 +61426,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -61242,16 +61446,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -61268,10 +61464,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -61303,32 +61495,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -61347,10 +61515,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -61363,48 +61527,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -61419,16 +61551,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -61455,22 +61579,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -61491,10 +61599,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -61509,10 +61613,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -61535,10 +61635,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -61547,16 +61643,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -61579,18 +61667,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -61611,16 +61687,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -61637,10 +61705,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -61672,32 +61736,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -61716,10 +61756,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -61732,48 +61768,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -61788,16 +61792,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -61824,22 +61820,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -61860,10 +61840,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -61878,10 +61854,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -61904,10 +61876,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -61916,16 +61884,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -61948,18 +61908,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -61980,16 +61928,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -62006,10 +61946,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -62059,10 +61995,6 @@
       {
        "name": "build_script_build",
        "unit": "blaze-engine@0.20261028.1 custom-build build-script-build build host"
-      },
-      {
-       "name": "build_script_build",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
       }
      ],
      "edition": "2024",
@@ -62090,32 +62022,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -62130,10 +62038,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -62146,48 +62050,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -62202,16 +62074,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -62238,22 +62102,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -62274,10 +62122,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -62292,10 +62136,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -62318,10 +62158,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -62330,16 +62166,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -62362,18 +62190,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -62394,16 +62210,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -62420,10 +62228,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -62608,6 +62412,31 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_fmt"
+    },
+    "blaze-in-place@0.20261028.1 lib blaze_in_place build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-in-place@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_in_place"
     },
     "blaze-lints@0.20261028.1 lib blaze_lints build": {
      "crate_type": "lib",
@@ -63188,6 +63017,71 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_source"
+    },
+    "blaze-splice@0.20261028.1 lib blaze_splice build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "pdb",
+       "unit": "pdb@0.8.0 lib pdb build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "wasm_encoder",
+       "unit": "wasm-encoder@0.244.0 lib wasm_encoder build"
+      },
+      {
+       "name": "wasmparser",
+       "unit": "wasmparser@0.236.1 lib wasmparser build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-splice@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_splice"
     },
     "blaze-store@0.20261028.1 lib blaze_store build": {
      "crate_type": "lib",
@@ -81917,6 +81811,356 @@
      "src": "src/lib.rs",
      "target": "blaze"
     },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build build host": {
+     "crate_type": "bin",
+     "deps": [],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "0",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build": {
+     "crate_type": "bin",
+     "deps": [
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build build host"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "custom-build",
+     "mode": "run-custom-build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "build.rs",
+     "target": "build-script-build"
+    },
+    "blaze-cargo@0.20261028.1 lib blaze_cargo build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "ar_archive_writer",
+       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
+      },
+      {
+       "name": "aws_config",
+       "unit": "aws-config@1.12.0 lib aws_config build"
+      },
+      {
+       "name": "aws_sdk_s3",
+       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
+      },
+      {
+       "name": "aws_smithy_http_client",
+       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
+      },
+      {
+       "name": "base64",
+       "unit": "base64@0.23.1 lib base64 build"
+      },
+      {
+       "name": "blaze_build_script",
+       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
+      },
+      {
+       "name": "fn_cache",
+       "unit": "blaze-cache@0.1.0 lib blaze build"
+      },
+      {
+       "name": "build_script_build",
+       "unit": "blaze-cargo@0.20261028.1 custom-build build-script-build run-custom-build"
+      },
+      {
+       "name": "blaze_fmt",
+       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_lints",
+       "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "blaze_macro_wasm",
+       "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
+      },
+      {
+       "name": "blaze_manifest",
+       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
+      },
+      {
+       "name": "blaze_metadata",
+       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
+      },
+      {
+       "name": "blaze_new",
+       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
+      },
+      {
+       "name": "blaze_registry",
+       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
+      },
+      {
+       "name": "blaze_resolve",
+       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+      },
+      {
+       "name": "blaze_store",
+       "unit": "blaze-store@0.20261028.1 lib blaze_store build"
+      },
+      {
+       "name": "blaze_tree",
+       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
+      },
+      {
+       "name": "blaze_units",
+       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
+      },
+      {
+       "name": "blaze_wasi",
+       "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
+      },
+      {
+       "name": "cargo_platform",
+       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
+      },
+      {
+       "name": "cargo_util_schemas",
+       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
+      },
+      {
+       "name": "cargo_metadata",
+       "unit": "cargo_metadata@0.23.1 lib cargo_metadata build"
+      },
+      {
+       "name": "cfg",
+       "unit": "cfg@0.0.0 lib cfg build"
+      },
+      {
+       "name": "dunce",
+       "unit": "dunce@1.0.5 lib dunce build"
+      },
+      {
+       "name": "ed25519_dalek",
+       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
+      },
+      {
+       "name": "futures_util",
+       "unit": "futures-util@0.3.32 lib futures_util build"
+      },
+      {
+       "name": "getrandom",
+       "unit": "getrandom@0.3.4 lib getrandom build"
+      },
+      {
+       "name": "hir_ty_codegen",
+       "unit": "hir-ty-codegen@0.20261028.1 lib hir_ty_codegen build"
+      },
+      {
+       "name": "http_body_util",
+       "unit": "http-body-util@0.1.5 lib http_body_util build"
+      },
+      {
+       "name": "hyper_rustls",
+       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
+      },
+      {
+       "name": "hyper_util",
+       "unit": "hyper-util@0.1.21 lib hyper_util build"
+      },
+      {
+       "name": "hyper",
+       "unit": "hyper@1.12.0 lib hyper build"
+      },
+      {
+       "name": "ide_db",
+       "unit": "ide-db@0.0.0 lib ide_db build"
+      },
+      {
+       "name": "intern",
+       "unit": "intern@0.0.0 lib intern build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "lzma_rust2",
+       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "paths",
+       "unit": "paths@0.0.0 lib paths build"
+      },
+      {
+       "name": "project_model",
+       "unit": "project-model@0.0.0 lib project_model build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "rustls",
+       "unit": "rustls@0.23.46 lib rustls build"
+      },
+      {
+       "name": "salsa",
+       "unit": "salsa@0.28.5 lib salsa build"
+      },
+      {
+       "name": "same_file",
+       "unit": "same-file@1.0.6 lib same_file build"
+      },
+      {
+       "name": "semver",
+       "unit": "semver@1.0.28 lib semver build"
+      },
+      {
+       "name": "serde",
+       "unit": "serde@1.0.228 lib serde build"
+      },
+      {
+       "name": "serde_derive",
+       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
+      },
+      {
+       "name": "serde_json",
+       "unit": "serde_json@1.0.150 lib serde_json build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "shlex",
+       "unit": "shlex@2.0.1 lib shlex build"
+      },
+      {
+       "name": "syntax",
+       "unit": "syntax@0.0.0 lib syntax build"
+      },
+      {
+       "name": "tar",
+       "unit": "tar@0.4.46 lib tar build"
+      },
+      {
+       "name": "thorin",
+       "unit": "thorin-dwp@0.10.0 lib thorin build"
+      },
+      {
+       "name": "tikv_jemalloc_ctl",
+       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
+      },
+      {
+       "name": "tikv_jemalloc_sys",
+       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
+      },
+      {
+       "name": "tokio",
+       "unit": "tokio@1.53.3 lib tokio build"
+      },
+      {
+       "name": "toml",
+       "unit": "toml@1.1.2+spec-1.1.0 lib toml build"
+      },
+      {
+       "name": "toml_edit",
+       "unit": "toml_edit@0.25.12+spec-1.1.0 lib toml_edit build"
+      },
+      {
+       "name": "toolchain",
+       "unit": "toolchain@0.0.0 lib toolchain build"
+      },
+      {
+       "name": "tracing",
+       "unit": "tracing@0.1.44 lib tracing build"
+      },
+      {
+       "name": "triomphe",
+       "unit": "triomphe@0.1.15 lib triomphe build"
+      },
+      {
+       "name": "typed_arena",
+       "unit": "typed-arena@2.0.2 lib typed_arena build"
+      },
+      {
+       "name": "url",
+       "unit": "url@2.5.8 lib url build"
+      },
+      {
+       "name": "vfs",
+       "unit": "vfs@0.0.0 lib vfs build"
+      },
+      {
+       "name": "zip",
+       "unit": "zip@9.1.2 lib zip build"
+      },
+      {
+       "name": "zstd",
+       "unit": "zstd@0.13.3 lib zstd build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-cargo@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_cargo"
+    },
     "blaze-doc@0.20261028.1 lib blaze_doc build": {
      "crate_type": "lib",
      "deps": [
@@ -82010,32 +82254,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -82054,10 +82274,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -82070,48 +82286,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -82126,16 +82310,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -82162,22 +82338,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -82198,10 +82358,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -82216,10 +82372,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -82242,10 +82394,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -82254,16 +82402,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -82286,18 +82426,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -82318,16 +82446,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -82344,10 +82464,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -82379,32 +82495,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -82423,10 +82515,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -82439,48 +82527,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -82495,16 +82551,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -82531,22 +82579,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -82567,10 +82599,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -82585,10 +82613,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -82611,10 +82635,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -82623,16 +82643,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -82655,18 +82667,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -82687,16 +82687,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -82713,10 +82705,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -82748,32 +82736,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -82792,10 +82756,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -82808,48 +82768,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -82864,16 +82792,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -82900,22 +82820,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -82936,10 +82840,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -82954,10 +82854,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -82980,10 +82876,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -82992,16 +82884,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -83024,18 +82908,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -83056,16 +82928,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -83082,10 +82946,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -83135,10 +82995,6 @@
       {
        "name": "build_script_build",
        "unit": "blaze-engine@0.20261028.1 custom-build build-script-build build host"
-      },
-      {
-       "name": "build_script_build",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched custom-build build-script-build run-custom-build"
       }
      ],
      "edition": "2024",
@@ -83166,32 +83022,8 @@
        "unit": "anyhow@1.0.104 lib anyhow build"
       },
       {
-       "name": "ar_archive_writer",
-       "unit": "ar_archive_writer@0.5.3 lib ar_archive_writer build"
-      },
-      {
-       "name": "aws_config",
-       "unit": "aws-config@1.12.0 lib aws_config build"
-      },
-      {
-       "name": "aws_sdk_s3",
-       "unit": "aws-sdk-s3@1.152.0 lib aws_sdk_s3 build"
-      },
-      {
-       "name": "aws_smithy_http_client",
-       "unit": "aws-smithy-http-client@1.5.0 lib aws_smithy_http_client build"
-      },
-      {
-       "name": "base64",
-       "unit": "base64@0.23.1 lib base64 build"
-      },
-      {
-       "name": "blaze_build_script",
-       "unit": "blaze-build-script@0.20261028.1 lib blaze_build_script build"
-      },
-      {
-       "name": "fn_cache",
-       "unit": "blaze-cache@0.1.0 lib blaze build"
+       "name": "blaze_cargo",
+       "unit": "blaze-cargo@0.20261028.1 lib blaze_cargo build"
       },
       {
        "name": "blaze_doc",
@@ -83206,10 +83038,6 @@
        "unit": "blaze-expand@0.20261028.1 lib blaze_expand build"
       },
       {
-       "name": "blaze_fmt",
-       "unit": "blaze-fmt@0.20261028.1 lib blaze_fmt build"
-      },
-      {
        "name": "blaze_lints",
        "unit": "blaze-lints@0.20261028.1 lib blaze_lints build"
       },
@@ -83222,48 +83050,16 @@
        "unit": "blaze-macro-wasm@0.20261028.1 lib blaze_macro_wasm build"
       },
       {
-       "name": "blaze_manifest",
-       "unit": "blaze-manifest@0.20261028.1 lib blaze_manifest build"
-      },
-      {
-       "name": "blaze_metadata",
-       "unit": "blaze-metadata@0.20261028.1 lib blaze_metadata build"
-      },
-      {
-       "name": "blaze_new",
-       "unit": "blaze-new@0.20261028.1 lib blaze_new build"
-      },
-      {
-       "name": "blaze_registry",
-       "unit": "blaze-registry@0.20261028.1 lib blaze_registry build"
-      },
-      {
-       "name": "blaze_resolve",
-       "unit": "blaze-resolve@0.20261028.1 lib blaze_resolve build"
+       "name": "blaze_splice",
+       "unit": "blaze-splice@0.20261028.1 lib blaze_splice build"
       },
       {
        "name": "blaze_store",
        "unit": "blaze-store@0.20261028.1 lib blaze_store build"
       },
       {
-       "name": "blaze_tree",
-       "unit": "blaze-tree@0.20261028.1 lib blaze_tree build"
-      },
-      {
-       "name": "blaze_units",
-       "unit": "blaze-units@0.20261028.1 lib blaze_units build"
-      },
-      {
        "name": "blaze_wasi",
        "unit": "blaze-wasi@0.20261028.1 lib blaze_wasi build"
-      },
-      {
-       "name": "cargo_platform",
-       "unit": "cargo-platform@0.3.3 lib cargo_platform build"
-      },
-      {
-       "name": "cargo_util_schemas",
-       "unit": "cargo-util-schemas@0.14.3 lib cargo_util_schemas build"
       },
       {
        "name": "cargo_metadata",
@@ -83278,16 +83074,8 @@
        "unit": "dunce@1.0.5 lib dunce build"
       },
       {
-       "name": "ed25519_dalek",
-       "unit": "ed25519-dalek@2.2.0 lib ed25519_dalek build"
-      },
-      {
-       "name": "futures_util",
-       "unit": "futures-util@0.3.32 lib futures_util build"
-      },
-      {
-       "name": "getrandom",
-       "unit": "getrandom@0.3.4 lib getrandom build"
+       "name": "flate2",
+       "unit": "flate2@1.1.9 lib flate2 build"
       },
       {
        "name": "gimli",
@@ -83314,22 +83102,6 @@
        "unit": "hir@0.0.0 lib hir build"
       },
       {
-       "name": "http_body_util",
-       "unit": "http-body-util@0.1.5 lib http_body_util build"
-      },
-      {
-       "name": "hyper_rustls",
-       "unit": "hyper-rustls@0.27.10 lib hyper_rustls build"
-      },
-      {
-       "name": "hyper_util",
-       "unit": "hyper-util@0.1.21 lib hyper_util build"
-      },
-      {
-       "name": "hyper",
-       "unit": "hyper@1.12.0 lib hyper build"
-      },
-      {
        "name": "ide_db",
        "unit": "ide-db@0.0.0 lib ide_db build"
       },
@@ -83350,10 +83122,6 @@
        "unit": "load-cargo@0.0.0 lib load_cargo build"
       },
       {
-       "name": "lzma_rust2",
-       "unit": "lzma-rust2@0.23.0 lib lzma_rust2 build"
-      },
-      {
        "name": "memchr",
        "unit": "memchr@2.8.1 lib memchr build"
       },
@@ -83368,10 +83136,6 @@
       {
        "name": "paths",
        "unit": "paths@0.0.0 lib paths build"
-      },
-      {
-       "name": "pdb",
-       "unit": "pdb@0.8.0 lib pdb build"
       },
       {
        "name": "proc_macro_api",
@@ -83394,10 +83158,6 @@
        "unit": "rustc-hash@2.1.2 lib rustc_hash build"
       },
       {
-       "name": "rustls",
-       "unit": "rustls@0.23.46 lib rustls build"
-      },
-      {
        "name": "salsa",
        "unit": "salsa@0.28.5 lib salsa build"
       },
@@ -83406,16 +83166,8 @@
        "unit": "same-file@1.0.6 lib same_file build"
       },
       {
-       "name": "semver",
-       "unit": "semver@1.0.28 lib semver build"
-      },
-      {
        "name": "serde",
        "unit": "serde@1.0.228 lib serde build"
-      },
-      {
-       "name": "serde_derive",
-       "unit": "serde_derive@1.0.228 proc-macro serde_derive build host"
       },
       {
        "name": "serde_json",
@@ -83438,18 +83190,6 @@
        "unit": "tar@0.4.46 lib tar build"
       },
       {
-       "name": "thorin",
-       "unit": "thorin-dwp@0.10.0 lib thorin build"
-      },
-      {
-       "name": "tikv_jemalloc_ctl",
-       "unit": "tikv-jemalloc-ctl@0.5.4 lib tikv_jemalloc_ctl build"
-      },
-      {
-       "name": "tikv_jemalloc_sys",
-       "unit": "tikv-jemalloc-sys@0.5.4+5.3.0-patched lib tikv_jemalloc_sys build"
-      },
-      {
        "name": "tikv_jemallocator",
        "unit": "tikv-jemallocator@0.5.4 lib tikv_jemallocator build"
       },
@@ -83470,16 +83210,8 @@
        "unit": "toolchain@0.0.0 lib toolchain build"
       },
       {
-       "name": "tracing",
-       "unit": "tracing@0.1.44 lib tracing build"
-      },
-      {
        "name": "triomphe",
        "unit": "triomphe@0.1.15 lib triomphe build"
-      },
-      {
-       "name": "typed_arena",
-       "unit": "typed-arena@2.0.2 lib typed_arena build"
       },
       {
        "name": "url",
@@ -83496,10 +83228,6 @@
       {
        "name": "wasmparser",
        "unit": "wasmparser@0.236.1 lib wasmparser build"
-      },
-      {
-       "name": "zip",
-       "unit": "zip@9.1.2 lib zip build"
       },
       {
        "name": "zstd",
@@ -83684,6 +83412,31 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_fmt"
+    },
+    "blaze-in-place@0.20261028.1 lib blaze_in_place build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-in-place@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_in_place"
     },
     "blaze-lints@0.20261028.1 lib blaze_lints build": {
      "crate_type": "lib",
@@ -84264,6 +84017,71 @@
      },
      "src": "src/lib.rs",
      "target": "blaze_source"
+    },
+    "blaze-splice@0.20261028.1 lib blaze_splice build": {
+     "crate_type": "lib",
+     "deps": [
+      {
+       "name": "anyhow",
+       "unit": "anyhow@1.0.104 lib anyhow build"
+      },
+      {
+       "name": "blaze_in_place",
+       "unit": "blaze-in-place@0.20261028.1 lib blaze_in_place build"
+      },
+      {
+       "name": "blaze_live",
+       "unit": "blaze-live@0.1.0 lib blaze_live build"
+      },
+      {
+       "name": "libc",
+       "unit": "libc@0.2.186 lib libc build"
+      },
+      {
+       "name": "memmap2",
+       "unit": "memmap2@0.9.11 lib memmap2 build"
+      },
+      {
+       "name": "object",
+       "unit": "object@0.37.3 lib object build"
+      },
+      {
+       "name": "pdb",
+       "unit": "pdb@0.8.0 lib pdb build"
+      },
+      {
+       "name": "rustc_hash",
+       "unit": "rustc-hash@2.1.2 lib rustc_hash build"
+      },
+      {
+       "name": "sha2",
+       "unit": "sha2@0.10.9 lib sha2 build"
+      },
+      {
+       "name": "wasm_encoder",
+       "unit": "wasm-encoder@0.244.0 lib wasm_encoder build"
+      },
+      {
+       "name": "wasmparser",
+       "unit": "wasmparser@0.236.1 lib wasmparser build"
+      }
+     ],
+     "edition": "2024",
+     "features": [],
+     "kind": "lib",
+     "mode": "build",
+     "pkg": "blaze-splice@0.20261028.1",
+     "profile": {
+      "codegen_units": null,
+      "debug_assertions": false,
+      "debuginfo": 0,
+      "name": "release",
+      "opt_level": "3",
+      "overflow_checks": false,
+      "panic": "unwind"
+     },
+     "src": "src/lib.rs",
+     "target": "blaze_splice"
     },
     "blaze-store@0.20261028.1 lib blaze_store build": {
      "crate_type": "lib",

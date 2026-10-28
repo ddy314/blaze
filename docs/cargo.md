@@ -8,7 +8,7 @@ blaze had another name and another command before 2026-10-28; [rename.md](rename
 Every setting below is `BLAZE_<NAME>`, and blaze stops when one is set under its name from
 before, saying what it is called now.
 
-Everything in this file was checked against the code in `crates/blaze-engine/src/cargo/` and run on
+Everything in this file was checked against the code in `crates/blaze-cargo/src/cargo/` and run on
 Linux x86-64. On macOS arm64 `harness/blaze_cli.py --small` was run, and what is known of
 it is under [macOS arm64](#macos-arm64). The design notes it was written from are in
 [reports/CARGO.md](reports/CARGO.md).
@@ -57,7 +57,7 @@ stderr while it does: rustc, cargo, the standard library and its source from the
 own servers, 97 MB on macOS, 134 MB on Linux x86-64 and 118 MB on Linux ARM64 (548 MB on macOS
 and 710 MB on Linux x86-64 once unpacked). Each file's sha256 is built
 into blaze, from the nightly's published manifest (`harness/toolchain_pins.py` writes them into
-`crates/blaze-engine/src/cargo/toolchain/pins.txt`), and a file with other bytes is refused. Concurrent
+`crates/blaze-cargo/src/cargo/toolchain/pins.txt`), and a file with other bytes is refused. Concurrent
 builds download it once; a download that stopped goes on from where it stopped the next time.
 Building with blaze's copy, blaze names its cargo, rustc and rustdoc in `CARGO`, `RUSTC` and
 `RUSTDOC` and puts its `bin` first on `PATH`, for the commands it runs and not for your shell.
@@ -74,6 +74,7 @@ says which Rust blaze builds with, downloading its copy first when there is none
     blaze status
     blaze stop
     blaze toolchain
+    blaze pin
 
 `blaze <command>` is the same as `blaze <command>`, for a machine where blaze brought
 its own Rust and there is no `cargo` on the path.
@@ -377,7 +378,7 @@ resolve, keeps its bytes in blaze's store by their sha256 and writes them into
 checksum (commit it). A build writes the store's copy below the target directory and sets the
 crate's own variable for a local copy to it; a missing or stale entry fails the build, naming
 the command, and nothing is downloaded. The crates blaze knows and their variables are
-`OVERRIDES` in `crates/blaze-engine/src/cargo/fetches.rs`; a script refused the network that it does
+`OVERRIDES` in `crates/blaze-cargo/src/cargo/fetches.rs`; a script refused the network that it does
 not know is told which variable an entry there would set.
 
 The ways out, in the workspace's root manifest, which is the only one a dependency from a
@@ -940,6 +941,41 @@ Cargo keeps what it builds through a workspace wrapper apart from what it builds
 one. `cargo build` and `blaze build` in one checkout therefore each compile the
 workspace's crates once, and share the dependencies.
 
+## Pinning a release of blaze
+
+A project pins blaze, not Rust: each release of blaze builds with the Rust it ships, and
+`rust-toolchain` files are not read ([toolchain.md](toolchain.md)). `blaze pin` writes the
+version of the blaze it is into the workspace's root `Cargo.toml`:
+
+    [workspace.metadata.blaze]
+    version = "0.20261027.0"
+
+(the rest of the manifest is kept as it was; in a package with no `[workspace]` that adds
+one, which makes it the root of its own workspace, as it is anyway when no other is above
+it). From then on the `blaze` (or `blaze`) anyone runs in that workspace runs that
+release, as Bazelisk runs the Bazel a `.bazelversion` names: when it is another release
+itself, it runs `~/.blaze/versions/<version>/blaze` (`$BLAZE_HOME/versions` with `BLAZE_HOME`)
+with the same arguments, and when that is not there it first downloads
+`blaze-v<version>-<host>.tar.gz` from the release on GitHub, checks its sha256 against the
+release's `SHA256SUMS` and unpacks it there. The network is used only then, once per
+release. A pinned release that can't be fetched (offline, no such release, no build for
+this host, another sha256) is an error, and no other blaze builds in its place.
+`BLAZE_RELEASES` names a mirror laid out as
+`https://github.com/indexable-inc/blaze/releases/download` (`<mirror>/v<version>/<asset>`),
+or a directory of `v<version>` directories of the assets. `blaze --version` says which
+blaze runs and why: as the workspace pins it, or as nothing pins one. `--manifest-path`
+picks the workspace a command is for, as it does for cargo.
+
+The pin may name a channel instead of a version ([release.md](release.md)):
+`version = "stable"` runs the newest release that passed the heavy tests, and
+`version = "canary"` the newest release. blaze reads which release the channel names from its
+pointer (`<releases>/channels/<channel>`, one small download, through `BLAZE_RELEASES` too),
+keeps it in `~/.blaze/channels/<channel>` and reads it again after an hour; that release is
+then run as a pinned version is. When the pointer can't be read (offline), the release it named
+when last read runs, with a line saying so; with none read before, it is an error. A pin to a
+version stays on that release, whose bytes never change: promotion from canary to stable flips
+the same release.
+
 ## Environment variables
 
 These are read by `blaze` and passed to the worker it starts. They are part of which
@@ -1166,7 +1202,7 @@ A command blaze has not written yet fails, says so and does nothing, with status
 A command cargo does not have is refused the same way (`error: no such command`): cargo would
 run a plugin, `cargo-<name>`, from the path, and blaze runs none. `blaze --list` prints
 the table below; flags typed before the command (`blaze -v fmt`) are read after it, as
-cargo reads them. The table is `SUBCOMMANDS` in `crates/blaze-engine/src/cargo/own/mod.rs`.
+cargo reads them. The table is `SUBCOMMANDS` in `crates/blaze-cargo/src/cargo/own/mod.rs`.
 
 | Command | blaze's | What it is, and what it waits for |
 |---|---|---|
