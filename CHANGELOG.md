@@ -8,6 +8,10 @@ each one's section: what `[Unreleased]` had, and the title of each change merged
 
 ## [Unreleased]
 
+### Fixed
+
+- Invalid built-in derives now fail `blaze check` and `blaze build`, including `Default` on an enum without a default variant and derives on unsupported item shapes (#751).
+
 ## [0.20261028.1] - 2026-10-28
 
 ### Fixed

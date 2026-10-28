@@ -15,6 +15,8 @@ report the dev targets' errors. Each target flag must pick what cargo's does: `-
 example or bench, `--test NAME` the one test, `--lib` no unit tests, and a member only
 depended on its library alone.
 
+`deriveerrors.py`: Unused invalid built-in derives fail check and build as Cargo's do; a valid edit and a daemon restart preserve the verdict (#751).
+
 ## Running them
 
 You need Python 3, the pinned nightly (`harness/toolchain`, `nightly-2026-10-25`) with
