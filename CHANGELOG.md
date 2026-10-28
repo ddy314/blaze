@@ -8,9 +8,51 @@ each one's section: what `[Unreleased]` had, and the title of each change merged
 
 ## [Unreleased]
 
+### Added
+
+- A build shows what it does while it does it. The daemon and its workers speak deterministic
+  CBOR frames (RFC 8949 §4.2.1) instead of JSON lines, and a worker publishes the build as
+  events: each step (loading the workspace, resolving names, compiling, checking, linking),
+  each crate's functions compiled and reused, and every function an edit rebuilt with why (its
+  body was edited, or it uses what was). On a terminal a live region is redrawn, never silent
+  for more than a second, and the build ends with one line (`Rebuilt 3 fns: render
+  (src/main.rs edited), draw, tick (uses what changed); 0.21s`); off a terminal cargo-like
+  lines. `-q` shows none.
+- `blaze why [fn|crate]` says what the last build rebuilt and why.
+- `--events json|cbor` writes the build's events to stdout, one record a line or frame.
+
+### Changed
+
+- `blaze test` keeps a hermetic test's pass by its code, with no opt-in (#836): a test whose
+  reachable code reaches no file, environment variable, socket, other process, foreign code,
+  inline assembly, unbounded indirect call, writable shared static or code blaze can't compile
+  runs again only when that code changes. Every other test runs every time. Each test, whether
+  it is hermetic and why not (a kind, what it reaches and the fewest calls to it) is written to
+  `target/blaze/tests.ndjson`, with counts and the reasons that keep the most tests running in
+  `target/blaze/tests.summary.json`; `blaze test --why` prints them as a table, and
+  `--why --json` as the NDJSON lines. `BLAZE_TESTS=all` runs every test. Sandboxed tests stay an
+  experimental opt-in.
+- Release profiles build with LLVM at the profile's level (#831): `opt-level` 2 and 3
+  (`release`, `bench`, a profile that inherits them) build at `-O2` and `-O3`, `s` and `z` at
+  `-O2`, and 0 and 1 (`dev`, `test`) stay on Cranelift. `BLAZE_BACKEND` and `BLAZE_OPT` still
+  choose. A dev build and a release build of one project keep separate workers. A blaze built
+  without its `llvm` feature refuses a profile that asks for LLVM instead of using Cranelift.
+
 ### Fixed
 
+- Preserve WASM proc-macro state and stored token spans within each consuming crate, including napi-rs constructor registration. Reconstruct declaration state after edits instead of reusing output-only or frozen declaration cache entries; compiled-module and function caching remain enabled.
 - Native proc macros receive real source positions, text and file paths through the bidirectional server protocol; a server that cannot enable source spans is refused (#823).
+
+## [0.20261028.2] - 2026-10-28
+
+### Added
+
+- A build or check that waits for the daemon says what it waits for: on a terminal one status
+  line, written over as the worker loads the workspace, resolves names, compiles, checks and
+  links (`Loading workspace (38 s)`), and cleared when it is done; off a terminal one line per
+  step. Before, a first build of a large workspace printed nothing for a minute. `-q` shows
+  none.
+
 ### Removed
 
 - `blaze enable` and `blaze disable`, and plain cargo building through blaze (#93, no-rustc.md's
@@ -21,6 +63,25 @@ each one's section: what `[Unreleased]` had, and the title of each change merged
   `BLAZE_RUSTC_BASE` is gone with it: the first edits no longer patch an executable rustc
   linked, which only that mode still had. `blaze-rustc` stays, as the wrapper of a load into
   cargo's target directory.
+
+### Merged
+
+- blaze pin: a workspace pins a release of blaze, which blaze runs (#841)
+- llvm.yaml: an archive already on the release is left alone (main's build jobs 404 on the pinned LLVM) (#879)
+- install.sh --channel canary: the newest dated tag whose release has its SHA256SUMS. releases.atom lists plain tags too, so #873 picked v0.20261028.0 while release.yaml was still building it (install.yaml macos-15, run 40638482080: 404 on its SHA256SUMS). Now each dated tag of the feed is tried newest first until one's checksums download, which also skips a release whose assets are still uploading. (#876)
+- ci.py: stdstatics.py's measured seconds (#880)
+- smoke corpus: programs blaze run/test must get right, std cases in the merge gate (#875)
+- blaze-cargo: the cargo drop-in is a crate of its own (crate split 4b) (#858)
+- promote.yaml: a canary that passes the heavy tests becomes stable, the same release flipped (#883)
+- pin: version = "stable" or "canary" runs the release that channel names (#882)
+- promote.yaml: a run with promote=false opens no issue (#885)
+- answers: a non-Apple target's spec is answered with SDKROOT set (macos arm64 / build: proc-macro server, release v0.20261028.1) (#884)
+- blaze-splice: the splice is a crate of its own (crate split 4b, second half) (#888)
+- answers: an Apple target's spec is answered with SDKROOT set; it names no deployment target (macos arm64 / build after #884) (#890)
+- Delete blaze enable and plain cargo's wrapper: blaze is the only way in (#93) (#886)
+- A workspace's target error keeps its cause; test of release v0.20261028.1's question (wasm32-wasip1 spec under MACOSX_DEPLOYMENT_TARGET) (#881)
+- agents: any agent takes any pull request to merged, drafts and other lanes' included (rule own-prs-to-merge) (#898)
+- blaze shows what the daemon is at while a build or check waits (#851)
 
 ## [0.20261028.1] - 2026-10-28
 
@@ -2726,7 +2787,8 @@ The first release.
 - No borrow checker: keep running `cargo check`.
 - Changing a struct the running program uses asks for a restart.
 
-[Unreleased]: https://github.com/indexable-inc/blaze/compare/v0.20261028.1...HEAD
+[Unreleased]: https://github.com/indexable-inc/blaze/compare/v0.20261028.2...HEAD
+[0.20261028.2]: https://github.com/indexable-inc/blaze/releases/tag/v0.20261028.2
 [0.20261028.1]: https://github.com/indexable-inc/blaze/releases/tag/v0.20261028.1
 [0.20261028.0]: https://github.com/indexable-inc/blaze/releases/tag/v0.20261028.0
 [0.20261027.0]: https://github.com/indexable-inc/blaze/releases/tag/v0.20261027.0

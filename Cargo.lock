@@ -678,7 +678,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-bench"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "blaze-store",
  "hir-ty-codegen",
@@ -687,7 +687,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-build-script"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "jobserver",
  "libc",
@@ -712,7 +712,7 @@ version = "0.1.0"
 
 [[package]]
 name = "blaze-cargo"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "ar_archive_writer",
@@ -730,10 +730,12 @@ dependencies = [
  "blaze-manifest",
  "blaze-metadata",
  "blaze-new",
+ "blaze-protocol",
  "blaze-registry",
  "blaze-resolve",
  "blaze-store",
  "blaze-tree",
+ "blaze-ui",
  "blaze-units",
  "blaze-wasi",
  "cargo-platform",
@@ -791,7 +793,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-doc"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "base-db",
@@ -814,7 +816,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-engine"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "blaze-cargo",
@@ -823,6 +825,7 @@ dependencies = [
  "blaze-lints",
  "blaze-live",
  "blaze-macro-wasm",
+ "blaze-protocol",
  "blaze-splice",
  "blaze-store",
  "blaze-wasi",
@@ -837,6 +840,7 @@ dependencies = [
  "hir-ty",
  "hir-ty-borrowck",
  "hir-ty-codegen",
+ "hir-ty-mir",
  "ide-db",
  "ide-diagnostics",
  "intern",
@@ -879,7 +883,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-expand"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "base-db",
  "blaze-store",
@@ -896,7 +900,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-fmt"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "annotate-snippets",
  "anyhow",
@@ -921,18 +925,18 @@ dependencies = [
 
 [[package]]
 name = "blaze-fuzz"
-version = "0.20261028.1"
+version = "0.20261028.2"
 
 [[package]]
 name = "blaze-in-place"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "libc",
 ]
 
 [[package]]
 name = "blaze-lints"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "annotate-snippets",
  "cfg",
@@ -956,7 +960,7 @@ version = "0.1.0"
 
 [[package]]
 name = "blaze-macro-wasm"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "base-db",
  "blaze-store",
@@ -967,6 +971,7 @@ dependencies = [
  "proc-macro-api",
  "ra-ap-rustc_lexer",
  "rustc-hash 2.1.2",
+ "salsa",
  "sha2 0.10.9",
  "span",
  "tt",
@@ -975,7 +980,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-manifest"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "annotate-snippets",
  "anyhow",
@@ -997,7 +1002,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-metadata"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "blaze-manifest",
@@ -1015,7 +1020,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-new"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "cargo-util-schemas",
@@ -1026,7 +1031,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-protocol"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "blaze-fuzz",
  "rustc-hash 2.1.2",
@@ -1035,7 +1040,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-registry"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "blaze-manifest",
@@ -1065,7 +1070,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-resolve"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "blaze-source",
@@ -1083,7 +1088,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-source"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "rustc-hash 2.1.2",
@@ -1095,7 +1100,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-splice"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "blaze-in-place",
@@ -1112,7 +1117,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-store"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "blaze-fuzz",
  "crc32fast",
@@ -1126,7 +1131,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-tree"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "blaze-manifest",
@@ -1137,14 +1142,14 @@ dependencies = [
 
 [[package]]
 name = "blaze-ui"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "blaze-protocol",
 ]
 
 [[package]]
 name = "blaze-units"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "blaze-manifest",
@@ -1158,7 +1163,7 @@ dependencies = [
 
 [[package]]
 name = "blaze-wasi"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "anyhow",
  "wasmtime",
@@ -2455,6 +2460,7 @@ dependencies = [
  "hir-def",
  "hir-expand",
  "hir-ty",
+ "hir-ty-mir",
  "intern",
  "itertools 0.15.0",
  "la-arena",
@@ -2496,7 +2502,6 @@ dependencies = [
  "itertools 0.15.0",
  "la-arena",
  "macros",
- "oorandom",
  "ra-ap-rustc_ast_ir",
  "ra-ap-rustc_index",
  "rustc-hash 2.1.2",
@@ -2516,7 +2521,6 @@ dependencies = [
  "tracing-subscriber",
  "tracing-tree",
  "triomphe",
- "unicode-width 0.2.2",
 ]
 
 [[package]]
@@ -2527,6 +2531,7 @@ dependencies = [
  "hir-def",
  "hir-expand",
  "hir-ty",
+ "hir-ty-mir",
  "hir-ty-wfcheck",
  "la-arena",
  "ra-ap-rustc_ast_ir",
@@ -2539,7 +2544,7 @@ dependencies = [
 
 [[package]]
 name = "hir-ty-codegen"
-version = "0.20261028.1"
+version = "0.20261028.2"
 dependencies = [
  "base-db",
  "blaze-fuzz",
@@ -2553,6 +2558,7 @@ dependencies = [
  "hir-def",
  "hir-expand",
  "hir-ty",
+ "hir-ty-mir",
  "indexmap",
  "inkwell",
  "intern",
@@ -2577,6 +2583,39 @@ dependencies = [
  "tracing",
  "triomphe",
  "wasm-encoder 0.244.0",
+]
+
+[[package]]
+name = "hir-ty-mir"
+version = "0.0.0"
+dependencies = [
+ "arrayvec",
+ "base-db",
+ "cfg",
+ "either",
+ "hir-def",
+ "hir-expand",
+ "hir-ty",
+ "intern",
+ "itertools 0.15.0",
+ "la-arena",
+ "macros",
+ "oorandom",
+ "ra-ap-rustc_ast_ir",
+ "ra-ap-rustc_index",
+ "rustc-hash 2.1.2",
+ "rustc_abi",
+ "rustc_apfloat",
+ "rustc_next_trait_solver",
+ "rustc_type_ir",
+ "salsa",
+ "smallvec",
+ "span",
+ "stdx",
+ "syntax",
+ "tracing",
+ "triomphe",
+ "unicode-width 0.2.2",
 ]
 
 [[package]]
