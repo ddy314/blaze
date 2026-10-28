@@ -8,6 +8,10 @@ each one's section: what `[Unreleased]` had, and the title of each change merged
 
 ## [Unreleased]
 
+### Fixed
+
+- Native proc macros receive real source positions, text and file paths through the bidirectional server protocol; a server that cannot enable source spans is refused (#823).
+
 ## [0.20261028.1] - 2026-10-28
 
 ### Fixed
