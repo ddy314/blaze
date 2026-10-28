@@ -17,6 +17,7 @@ mod check;
 mod content;
 mod doc;
 mod doctest;
+mod events;
 mod frozen;
 mod inputs;
 mod link;
@@ -2362,6 +2363,14 @@ fn closure_number(
 /// library and its binary may share the name, and both are being built. A `krate` that is the
 /// path of a `.rs` file is the one target with that root file, which tells a test from an
 /// example of the same name.
+/// What the records of a build call the crate `args` builds ([`events`]): its name, or what
+/// `--crate` says.
+fn shown_crate(db: &RootDatabase, args: &Args) -> String {
+    let named = crates_named(db, &args.krate, args).unwrap_or_default();
+    let name = named.first().and_then(|it| it.display_name(db));
+    name.map_or_else(|| args.krate.clone(), |it| it.to_string())
+}
+
 fn crates_named(db: &RootDatabase, krate: &str, args: &Args) -> anyhow::Result<Vec<Crate>> {
     let mut found = crates_called(db, krate, args);
     if args.library {
@@ -2763,7 +2772,9 @@ impl Checkouts {
             self.loaded.replace(at, self.split(base, &over, &own));
             self.splits[at] = Some(Split { base: self.roots[base].1.clone(), own });
         }
-        self.loaded.add(Vec::new(), &self.cargo_config.extra_env, &self.load_config, vfs, db)
+        self.loaded.add(Vec::new(), &self.cargo_config.extra_env, &self.load_config, vfs, db)?;
+        prepare_macro_sessions(db);
+        Ok(())
     }
 
     /// How the daemon builds `project`: as itself when its checkout is loaded, and as its
@@ -2907,6 +2918,7 @@ impl Checkouts {
         }
         let workspaces_at = start.elapsed();
         self.loaded.add(workspaces, &self.cargo_config.extra_env, &self.load_config, vfs, db)?;
+        prepare_macro_sessions(db);
         if std::env::var_os("BLAZE_STATS").is_some() {
             let files = start.elapsed() - workspaces_at;
             eprintln!(
@@ -2998,6 +3010,7 @@ impl Checkouts {
             self.debug[at] = self.debug[base].clone();
         }
         self.loaded.add(Vec::new(), &self.cargo_config.extra_env, &self.load_config, vfs, db)?;
+        prepare_macro_sessions(db);
         failed
     }
 
@@ -3496,6 +3509,17 @@ fn resolve_names(db: &RootDatabase, crates: &[ide_db::base_db::Crate]) {
     });
 }
 
+/// Establishes declaration-order macro state before incremental queries validate bodies.
+fn prepare_macro_sessions(db: &RootDatabase) {
+    hir::attach_db(db, || {
+        for &krate in &*ide_db::base_db::all_crates(db) {
+            if hir_def::nameres::may_have_session_macros(db, krate) {
+                _ = hir::crate_def_map(db, krate);
+            }
+        }
+    });
+}
+
 /// Resolves the names and finds the impls of `crates`, on `threads`.
 fn resolve_all(db: &RootDatabase, crates: &[ide_db::base_db::Crate], threads: usize) {
     // A crate comes after its dependencies in the list: a thread that starts on one whose
@@ -3798,7 +3822,7 @@ fn reach_of_tests(
         functions.iter().copied().filter(|&it| hir::Function::from(it).is_test(db)).collect();
     // `cargo test` runs a `#[bench]` once as a test.
     let benches = functions.iter().map(|&it| hir::Function::from(it)).filter(|it| it.is_bench(db));
-    let mut text = String::new();
+    let mut text = format!("{}\n", cargo::plan::REACH_FORMAT);
     for bench in benches {
         let Some(name) = test_harness::name(db, krate, bench) else { continue };
         text.push_str(&format!("-\t{name}\tit is a benchmark\n"));
@@ -3806,28 +3830,40 @@ fn reach_of_tests(
     for (&id, reach) in tests.iter().zip(hir_ty_codegen::tests_reach(db, resolver, &tests)) {
         let function = hir::Function::from(id);
         let Some(name) = test_harness::name(db, krate, function) else { continue };
-        let field = |it: &str| it.replace(['\t', '\n'], " ");
-        let why = |it: &hir_ty_codegen::AlwaysRun| {
-            let path: Vec<String> = it.path.iter().map(|it| field(it)).collect();
-            format!("{}\t{}", field(&it.why), path.join(" -> "))
+        let attrs = function.source(db).map(|it| {
+            let attrs = it.value.attrs().map(|it| it.syntax().text().to_string());
+            attrs.collect::<Vec<_>>().join("\n")
+        });
+        let identity = format!("{:032x}\n{}", reach.hash, attrs.unwrap_or_default());
+        let identity = sha2::Sha256::digest(identity.as_bytes());
+        let hex: String = identity.iter().map(|it| format!("{it:02x}")).collect();
+        let blocking = reach.found.iter().filter(|it| it.kind.blocks());
+        let recorded =
+            blocking.clone().all(|it| cargo::plan::recorded_by_a_sandbox(it.kind.name()));
+        let mark = match (reach.hermetic(), recorded) {
+            (true, _) => "",
+            (false, true) => "~",
+            (false, false) => "!",
         };
-        let line = match reach {
-            Ok(reach) => {
-                let attrs = function.source(db).map(|it| {
-                    let attrs = it.value.attrs().map(|it| it.syntax().text().to_string());
-                    attrs.collect::<Vec<_>>().join("\n")
-                });
-                let identity = format!("{:032x}\n{}", reach.hash, attrs.unwrap_or_default());
-                let identity = sha2::Sha256::digest(identity.as_bytes());
-                let hex: String = identity.iter().map(|it| format!("{it:02x}")).collect();
-                match &reach.outside {
-                    None => format!("{hex}\t{name}\n"),
-                    Some(outside) => format!("~{hex}\t{name}\t{}\n", why(outside)),
-                }
-            }
-            Err(always) => format!("-\t{name}\t{}\n", why(&always)),
+        let found: Vec<cargo::plan::Reason> = reach
+            .found
+            .iter()
+            .map(|it| cargo::plan::Reason {
+                kind: it.kind.name().to_owned(),
+                what: it.what.clone(),
+                why: it.why.clone(),
+                chain: it
+                    .path
+                    .iter()
+                    .map(|call| cargo::plan::Call::new(call.name.clone(), call.at.as_deref()))
+                    .collect(),
+            })
+            .collect();
+        let (blocking, others): (Vec<_>, Vec<_>) = found.into_iter().partition(|it| it.blocks());
+        let json = |it: &[cargo::plan::Reason]| {
+            serde_json::to_string(it).unwrap_or_else(|_| "[]".to_owned())
         };
-        text.push_str(&line);
+        text.push_str(&format!("{mark}{hex}\t{name}\t{}\t{}\n", json(&blocking), json(&others)));
     }
     text
 }
@@ -3894,6 +3930,7 @@ fn write_harnesses(db: &mut RootDatabase, texts: Vec<(vfs::FileId, String)>) -> 
     for (file, text) in &texts {
         db.set_file_text_with_durability(*file, text, Durability::LOW);
     }
+    prepare_macro_sessions(db);
     texts.into_iter().map(|it| it.0).collect()
 }
 
@@ -4741,6 +4778,7 @@ fn std_unit_at(
         debug,
         ..args.clone()
     };
+    events::at(events::Step::Std, None);
     let built = build_unheld(db, table, &of_unit, &mut Rejections::default(), listed)
         .with_context(|| {
             let names: Vec<&str> = unit.iter().map(|it| it.0.as_str()).collect();
@@ -4839,7 +4877,6 @@ fn link_executable(
         Ok(exports)
     });
     let exports = exports.transpose()?;
-    blaze_macro_wasm::flush();
     let took = link::executable(
         db,
         &program,
@@ -6508,6 +6545,7 @@ impl WatchedFile {
         if added.is_empty() {
             return Loaded::Nothing;
         }
+        prepare_macro_sessions(db);
         let mut was = FxHashMap::default();
         files.retain(|it| {
             let watched = matches!(it.file, Watched::Included(_))
@@ -6559,6 +6597,7 @@ impl WatchedFile {
             });
             changed |= db.reload_included_file(&path);
         }
+        prepare_macro_sessions(db);
         changed
     }
 }
@@ -7152,8 +7191,8 @@ fn memo_capacities(db: &mut RootDatabase) -> anyhow::Result<()> {
             ),
         }
     }
-    hir_ty::mir::set_mir_capacity(db, mir);
-    hir_ty::mir::set_runtime_mir_capacity(db, runtime);
+    hir_ty_mir::mir::set_mir_capacity(db, mir);
+    hir_ty_mir::mir::set_runtime_mir_capacity(db, runtime);
     hir_ty_codegen::set_code_capacity(db, compiled, inlinable);
     Ok(())
 }
@@ -8370,6 +8409,7 @@ fn follow_cargo(
             checkouts.loaded.replace(beside.at, workspace);
             let Checkouts { loaded, cargo_config, load_config, .. } = checkouts;
             loaded.add(Vec::new(), &cargo_config.extra_env, load_config, vfs, db)?;
+            prepare_macro_sessions(db);
             beside.applied = lines.len();
             all_applied = all;
         }
@@ -8584,6 +8624,10 @@ fn run_holding(
         anyhow::Ok(shared)
     });
 
+    if let Some(socket) = &args.socket {
+        events::said_beside(socket);
+    }
+    events::at(events::Step::LoadWorkspace, None);
     let start = Instant::now();
     let selection = args.selection.clone();
     blaze_store::identify_ahead();
@@ -8670,6 +8714,7 @@ fn run_holding(
     if args.run_tool {
         run_tool_std(&mut db)?;
     }
+    prepare_macro_sessions(&db);
 
     if args.out.is_dir() {
         let texts = harnesses(&db, [&args], None);
@@ -8698,6 +8743,7 @@ fn run_holding(
     if remote::required() {
         shared = pulled(pulling.take().expect("not joined yet"))?;
     }
+    events::at(events::Step::Resolve, None);
     let built = built_crates(&db, &args)?;
     let mut served = frozen::serve(&mut db, &built);
     // What is frozen names the files its `include!`s read: those not loaded yet are, and
@@ -8859,6 +8905,7 @@ fn run_holding(
                 cold
             }
             None => {
+                let _compiling = events::compiling(&shown_crate(&db, &args));
                 let mut cold = build_unheld(&db, &table, &args, &mut known, &listed)?;
                 // An `include!` in a body is first seen when the body is compiled.
                 if WatchedFile::include_sources(&mut files, &mut tree, &mut db) != Loaded::Nothing {
@@ -8929,6 +8976,7 @@ fn run_holding(
                 .collect();
             let mut all: Vec<_> = paths.keys().copied().collect();
             all.sort_unstable();
+            events::at(events::Step::Check, Some(&format!("{} files", all.len())));
             let sources = Sources { paths };
             let lints = !args.lints_capped;
             let within = Some(within);
@@ -8945,6 +8993,9 @@ fn run_holding(
         }
         memory::report(&mut db, "build")?;
         report_stats(&known.stats);
+        let named = shown_crate(&db, &args);
+        events::built(&db, &named, &known.stats, None);
+        events::at(events::Step::Link, Some(&named));
         link(
             args.link_cmd.as_deref(),
             args.splice.as_deref(),
@@ -9048,6 +9099,7 @@ fn run_holding(
             Some((inside.to_owned(), db.file_text(id).text(&db).clone()))
         })
         .collect();
+    events::idle();
     let listener = match &args.socket {
         Some(path) => match socket::Served::bind(path) {
             Ok(served) => Some(served),
@@ -9074,6 +9126,7 @@ fn run_holding(
     {
         use ide_db::base_db::salsa::{Database, Durability};
         db.synthetic_write(Durability::LOW);
+        prepare_macro_sessions(&db);
     }
     // Only a worker that serves builds again and lets go after; the bookkeeping of an `lru`
     // costs every fetch of its queries.
@@ -9332,6 +9385,7 @@ fn run_holding(
                         }
                         builds.settle(&mut db, &mut programs)?;
                         let reading = process::turn(&mut db, stream.env.clone());
+                        prepare_macro_sessions(&db);
                         if !reading.is_empty() {
                             for program in &mut programs {
                                 program.known.touch(&db, Some(&reading));
@@ -9823,6 +9877,7 @@ fn run_holding(
             }
             std::thread::sleep(Duration::from_millis(20));
         }
+        prepare_macro_sessions(&db);
         // Without clients, the first program is built whenever a file changes.
         let building: FxHashSet<usize> = match serving {
             true => clients.iter().map(|it| it.0).collect(),
@@ -9910,6 +9965,7 @@ fn run_holding(
         // A write stops the builds under way, so nothing is written when nothing changed.
         if changed != 0 || !background {
             db.apply_change(change);
+            prepare_macro_sessions(&db);
         }
         // The tests of a crate an edited file is of are listed again after the edit, and those
         // of a program asked for the first time; a root file the edit did not touch is noted
@@ -9940,6 +9996,7 @@ fn run_holding(
         let applied_change = start.elapsed();
         if !removed.is_empty() {
             tree.remove(&mut db, &removed);
+            prepare_macro_sessions(&db);
             let mut index = 0;
             files.retain(|_| {
                 index += 1;
@@ -9956,6 +10013,7 @@ fn run_holding(
         for path in included {
             db.reload_included_file(&path);
         }
+        prepare_macro_sessions(&db);
         // Asked of every file before any is noted: noting one forgets the functions listed.
         for program in &mut programs {
             // A harness written into the root of a library is an edit of the program of its
@@ -10126,6 +10184,7 @@ fn run_holding(
                         Err(panic) => Some(Ok(program.panicked(&*panic))),
                     };
                     end_link();
+                    events::idle();
                     let _ = sender.send(Event::Built(at, program, answer));
                 });
             }
@@ -10182,12 +10241,14 @@ fn run_holding(
             if late.is_empty() {
                 break answers;
             }
+            prepare_macro_sessions(&db);
             for program in &mut programs {
                 program.known.touch(&db, Some(&late));
                 program.unbuilt.stale = true;
             }
             listed.touch(&db, Some(&late));
         };
+        events::idle();
         if std::env::var_os("BLAZE_QUERIES").is_some() {
             let ran: Vec<String> = ide_db::executions::take(&db)
                 .iter()
@@ -10730,6 +10791,8 @@ impl Program {
             }
         }
         let &Edit { start, age, settled, read, apply, changed } = edit;
+        let named = shown_crate(db, args);
+        let compiling = events::compiling(&named);
         listed.building(args.crates().filter_map(|it| crates_named(db, it, args).ok()).flatten());
         // Another checkout's files are not this program's to be refused for.
         let mut edited = unbuilt.edited.clone();
@@ -10815,6 +10878,15 @@ impl Program {
         eprint!("edit (apply {apply:.1?}): ");
         report(&warm);
         report_stats(&known.stats);
+        drop(compiling);
+        let edited_paths: FxHashMap<vfs::FileId, PathBuf> = edited
+            .iter()
+            .filter_map(|file| {
+                let path = paths.paths.get(file)?;
+                Some((*file, path.strip_prefix(&args.checkout).unwrap_or(path).to_owned()))
+            })
+            .collect();
+        events::built(db, &named, &known.stats, Some(&edited_paths));
         let reported = start.elapsed();
         let out_of_date = hir::attach_db(db, || known.out_of_date(db));
         let dated = start.elapsed();
@@ -10885,6 +10957,7 @@ impl Program {
             let (splice, patch) = (args.splice.as_deref(), args.patch.as_deref());
             let cmd = args.link_cmd.as_deref().filter(|_| failed.is_none() && link_it);
             begin_link();
+            events::at(events::Step::Link, Some(&named));
             let packs = packs_whole(args);
             let own_line = args.exe.is_some();
             let unlinked = link(

@@ -19,7 +19,7 @@ experimental = ["sandboxed-tests"]
 build-script-env = ["LLVM_SYS_231_PREFIX"]
 
 [workspace.package]
-version = "0.20261028.1"
+version = "0.20261028.2"
 rust-version = "1.101"
 edition = "2024"
 license = "MIT OR Apache-2.0"
@@ -79,6 +79,7 @@ hir-def = { path = "crates/hir-def", version = "0.0.0" }
 hir-expand = { path = "crates/hir-expand", version = "0.0.0" }
 hir-ty = { path = "crates/hir-ty", version = "0.0.0" }
 hir-ty-borrowck = { path = "crates/hir-ty-borrowck", version = "0.0.0" }
+hir-ty-mir = { path = "crates/hir-ty-mir", version = "0.0.0" }
 hir-ty-wfcheck = { path = "crates/hir-ty-wfcheck", version = "0.0.0" }
 hir-ty-codegen = { path = "crates/hir-ty-codegen" }
 blaze-expand = { path = "crates/blaze-expand" }
